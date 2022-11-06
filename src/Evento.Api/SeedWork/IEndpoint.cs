@@ -2,5 +2,5 @@
 
 public interface IEndpoint
 {
-    void InitializeRoutes(IEndpointRouteBuilder app);
+    void Setup(IEndpointRouteBuilder app);
 }

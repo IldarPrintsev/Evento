@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Json;
-using static Evento.Api.Users.CreateUserEndpoint;
+using Evento.Api.Users.CreateUser;
+using static Evento.Api.Users.CreateUser.CreateUserEndpoint;
 
 namespace Evento.UnitTests.Api.Users;
 

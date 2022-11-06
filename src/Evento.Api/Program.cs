@@ -1,4 +1,5 @@
-using Evento.Api.Extensions;
+using Evento.Api.Configuration.WebApplication;
+using Evento.Api.Configuration.WebApplicationBuilder;
 using Evento.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
+builder.Services.AddMapster();
 
 var app = builder.Build();
 
@@ -23,5 +25,5 @@ app.UseCustomEndpoints();
 
 app.Run();
 
-//Add public Program class to test Api
+//Configure integration tests
 public partial class Program { }

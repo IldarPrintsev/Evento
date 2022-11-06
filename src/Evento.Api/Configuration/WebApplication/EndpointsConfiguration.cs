@@ -1,9 +1,9 @@
 ﻿using Evento.Api.SeedWork;
 using System.Reflection;
 
-namespace Evento.Api.Extensions;
+namespace Evento.Api.Configuration.WebApplication;
 
-public static class IEndpointRouteBuilderExtensions
+public static class EndpointsConfiguration
 {
     public static IEndpointRouteBuilder UseCustomEndpoints(this IEndpointRouteBuilder routeBuilder)
     {
@@ -12,9 +12,9 @@ public static class IEndpointRouteBuilderExtensions
             .Where(type => typeof(IEndpoint).IsAssignableFrom(type) && type.IsClass)
             .Select(e => Activator.CreateInstance(e)).Cast<IEndpoint>();
 
-        foreach(var endpoint in endpoints)
+        foreach (var endpoint in endpoints)
         {
-            endpoint.InitializeRoutes(routeBuilder);
+            endpoint.Setup(routeBuilder);
         }
 
         return routeBuilder;
