@@ -4,9 +4,9 @@ namespace Evento.Application.Users.Commands.CreateUser;
 
 public sealed record CreateUserCommand(
     string? Username
-    ) : ICommand<int> 
-{ 
-    public sealed class CreateUserCommandHandler 
+    ) : ICommand<int>
+{
+    public sealed class CreateUserCommandHandler
         : ICommandHandler<CreateUserCommand, int>
     {
         public CreateUserCommandHandler()
