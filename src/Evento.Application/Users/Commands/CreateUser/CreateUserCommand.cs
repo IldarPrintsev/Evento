@@ -1,12 +1,13 @@
-﻿using MediatR;
+﻿using Evento.Application.SeedWork;
 
 namespace Evento.Application.Users.Commands.CreateUser;
 
-public record CreateUserCommand(string? Username) 
-    : IRequest<int> 
+public sealed record CreateUserCommand(
+    string? Username
+    ) : ICommand<int> 
 { 
-    public class CreateUserCommandHandler 
-        : IRequestHandler<CreateUserCommand, int>
+    public sealed class CreateUserCommandHandler 
+        : ICommandHandler<CreateUserCommand, int>
     {
         public CreateUserCommandHandler()
         {

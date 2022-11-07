@@ -1,8 +1,7 @@
+using Evento.Api.Users.CreateUser;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Json;
-using Evento.Api.Users.CreateUser;
-using static Evento.Api.Users.CreateUser.CreateUserEndpoint;
 
 namespace Evento.UnitTests.Api.Users;
 
@@ -16,7 +15,10 @@ public class CreateUserEndpointTests
             WebApplicationFactory<Program>();
         using var client = application.CreateClient();
 
-        var response = await client.PostAsJsonAsync("/api/users", new CreateUserRequest("1"));
+        var response = await client.PostAsJsonAsync("/api/users", new CreateUserRequest
+        {
+            Username = "1"
+        });
         
         var result = await response.Content.ReadFromJsonAsync<int>();
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

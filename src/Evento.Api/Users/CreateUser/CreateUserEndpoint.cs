@@ -13,12 +13,12 @@ public class CreateUserEndpoint : IEndpoint
            .WithName("CreateUser");
     }
 
-    public static async Task<IResult> CreateUserAsync(
+    internal static async Task<IResult> CreateUserAsync(
         [FromBody] CreateUserRequest request,
-        [FromServices] IMediator mediator,
+        [FromServices] ISender sender,
         CancellationToken ct)
     {
-        var result = await mediator.Send(request.ToCommand(), ct);
+        var result = await sender.Send(request.ToCommand(), ct);
 
         return Results.Ok(result);
     }

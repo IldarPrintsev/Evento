@@ -1,6 +1,6 @@
 using Evento.Api.Configuration.WebApplication;
 using Evento.Api.Configuration.WebApplicationBuilder;
-using Evento.Application.Extensions;
+using Evento.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 

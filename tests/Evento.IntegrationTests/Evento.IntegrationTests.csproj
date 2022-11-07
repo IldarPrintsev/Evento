@@ -28,8 +28,4 @@
     <ProjectReference Include="..\..\src\Evento.Api\Evento.Api.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-	<InternalsVisibleTo Include="Evento.IntegrationTests" />
-  </ItemGroup>
-
 </Project>
