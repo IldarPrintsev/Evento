@@ -2,7 +2,6 @@
 using MediatR;
 
 namespace Evento.Api.SeedWork;
-
 public abstract record BaseHttpRequest<TMediatorRequest> : IRegister
     where TMediatorRequest : IBaseRequest
 {

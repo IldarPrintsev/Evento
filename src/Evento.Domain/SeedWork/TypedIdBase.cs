@@ -4,12 +4,11 @@ public abstract class TypedIdBase<TValue>
     : ITypedId, IEquatable<TypedIdBase<TValue>>
     where TValue : notnull
 {
-    protected TypedIdBase(TValue value) 
-        => Value = value;
-
     public TValue Value { get; }
+    public string TextValue { get; }
 
-    public abstract string TextValue { get; }
+    protected TypedIdBase(TValue value, string textValue) 
+        => (Value, TextValue) = (value, textValue);
 
     public override bool Equals(object? obj)
         => obj is TypedIdBase<TValue> entity && Equals(entity);
