@@ -30,11 +30,8 @@ public sealed class ValidationPipelineBehavior<TRequest, TResponse>
             failures.AddRange(result.Errors.Where(x => x != null));
         }
 
-        if (failures.Any())
-        {
-            throw new ValidationException(failures);
-        }
-
-        return await next();
+        return failures.Any() 
+            ? throw new ValidationException(failures) 
+            : await next();
     }
 }
