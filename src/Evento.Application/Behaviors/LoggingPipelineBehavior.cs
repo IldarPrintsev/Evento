@@ -27,24 +27,30 @@ public sealed class LoggingPipelineBehavior<TRequest, TResponse>
         try
         {
             _logger.LogInformation(
-                "Begin Request Id: {UniqueId}, request name: {RequestName}",
+                "Request executing. Id: {@UniqueId}. Name: {@RequestName}. Payload: {@Request}.",
                 unqiueId,
-                requestName);
+                requestName,
+                request);
 
             response = await next();
-        }
-        catch
-        {
-            throw;
-        }
-        finally
-        {
+
             timer.Stop();
             _logger.LogInformation(
-                "Finish Request Id: {UnqiueId}, request name: {RequestName}, total request time: {ElapsedMilliseconds}ms",
+                "Request failed. Id: {@UniqueId}, request name: {@RequestName}",
+                unqiueId,
+                requestName);
+        }
+        catch (Exception exception)
+        {
+            timer.Stop();
+            _logger.LogError(
+                exception,
+                "Request failed. Id: {@UniqueId}. Name: {@RequestName}. Time: {@ElapsedMilliseconds}ms",
                 unqiueId,
                 requestName,
                 timer.ElapsedMilliseconds);
+
+            throw;
         }
 
         return response;
