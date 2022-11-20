@@ -17,7 +17,6 @@ public static class EFConfiguration
             => opts.UseSqlServer(configuration.GetConnectionString(sqlConnectionString)));
 
         services.AddScoped<IUnitOfWork, EFUnitOfWork>();
-
         services.AddScoped<IOutboxMessageRepository, OutboxMessageEfRepository>();
 
         return services;

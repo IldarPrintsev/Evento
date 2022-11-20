@@ -36,9 +36,10 @@ public sealed class LoggingPipelineBehavior<TRequest, TResponse>
 
             timer.Stop();
             _logger.LogInformation(
-                "Request failed. Id: {@UniqueId}, request name: {@RequestName}",
+                "Request succeded. Id: {@UniqueId}. Name: {@RequestName}. Time: {@ElapsedMilliseconds}ms",
                 unqiueId,
-                requestName);
+                requestName,
+                timer.ElapsedMilliseconds);
         }
         catch (Exception exception)
         {

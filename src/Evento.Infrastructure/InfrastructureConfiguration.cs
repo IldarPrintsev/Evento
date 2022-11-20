@@ -28,7 +28,7 @@ public static class InfrastructureConfiguration
                 services.AddDapper(configuration, sqlConnectionString);
                 break;
             default:
-                throw new InvalidOperationException($"{sqlORM} not implemented");
+                throw new InvalidOperationException($"{sqlORM} orm not implemented");
         }
 
         return services;

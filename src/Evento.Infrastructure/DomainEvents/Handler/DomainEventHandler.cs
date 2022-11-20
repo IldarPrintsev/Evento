@@ -34,7 +34,7 @@ public sealed class DomainEventHandler : IDomainEventHandler
         CancellationToken ct = default)
     {
         var result = new List<IDomainEvent>();
-        var messages = await outboxMessageRepository.GetManyAsync(eventsAmount, ct);
+        var messages = await outboxMessageRepository.GetUnprocessedMessagesAsync(eventsAmount, ct);
         if (messages is null || !messages.Any())
         {
             return result;

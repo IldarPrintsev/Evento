@@ -27,7 +27,6 @@ public static class DapperConfiguration
         });
 
         services.AddScoped<IUnitOfWork, DapperUnitOfWork>();
-
         services.AddScoped<IOutboxMessageRepository, OutboxMessageEfRepository>();
 
         return services;

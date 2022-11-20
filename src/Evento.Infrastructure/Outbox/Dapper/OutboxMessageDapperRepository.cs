@@ -17,7 +17,7 @@ public class OutboxMessageDapperRepository : IOutboxMessageRepository
         _dbTransaction = dbTransaction;
     }
 
-    Task<List<OutboxMessage>> IOutboxMessageRepository.GetManyAsync(int count, CancellationToken ct) 
+    public Task<List<OutboxMessage>> GetUnprocessedMessagesAsync(int count, CancellationToken ct) 
         => throw new NotImplementedException();
 
     public async Task InsertAsync(IEnumerable<OutboxMessage> messages, CancellationToken ct = default) 
