@@ -13,8 +13,11 @@ public static class EFConfiguration
         IConfiguration configuration,
         string sqlConnectionString)
     {
-        services.AddDbContext<EventoContext>(opts 
-            => opts.UseSqlServer(configuration.GetConnectionString(sqlConnectionString)));
+        services.AddDbContext<EventoContext>(opts =>
+        {
+            opts.UseSqlServer(configuration.GetConnectionString(sqlConnectionString));
+            opts.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        });
 
         services.AddScoped<IUnitOfWork, EFUnitOfWork>();
         services.AddScoped<IOutboxMessageRepository, OutboxMessageEfRepository>();

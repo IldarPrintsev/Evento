@@ -1,5 +1,7 @@
-﻿using Evento.Infrastructure.Persistence.Dapper;
+﻿using Evento.Infrastructure.BackgroundJobs;
+using Evento.Infrastructure.Persistence.Dapper;
 using Evento.Infrastructure.Persistence.EF;
+using Evento.Infrastructure.SharedKernel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,11 +15,11 @@ public enum SqlORM
 
 public static class InfrastructureConfiguration
 {
-    public static IServiceCollection AddInfrastructure(
+    public static IServiceCollection AddInfrastructure<TDomainEventPublisher>(
         this IServiceCollection services,
         IConfiguration configuration,
         string sqlConnectionString,
-        SqlORM sqlORM = SqlORM.EF)
+        SqlORM sqlORM) where TDomainEventPublisher : class, IDomainEventPublisher
     {
         switch (sqlORM)
         {
@@ -30,6 +32,10 @@ public static class InfrastructureConfiguration
             default:
                 throw new InvalidOperationException($"{sqlORM} orm not implemented");
         }
+
+        services.AddScoped<IDomainEventPublisher, TDomainEventPublisher>();
+
+        services.AddQuartzJobs();
 
         return services;
     }

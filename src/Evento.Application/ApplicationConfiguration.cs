@@ -1,4 +1,5 @@
 ﻿using Evento.Application.Configuration;
+using Evento.Application.DomainEvents;
 using Evento.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,7 @@ public static class ApplicationConfiguration
     {
         services.AddMediator();
 
-        services.AddInfrastructure(
+        services.AddInfrastructure<DomainEventsMediatorPublisher>(
             configuration, 
             sqlConnectionString, 
             SqlORM.EF);

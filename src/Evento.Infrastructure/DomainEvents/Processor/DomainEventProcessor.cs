@@ -22,10 +22,18 @@ public sealed class DomainEventProcessor : IDomainEventProcessor
 
     public async Task ProcessAsync(int eventAmount = 20, CancellationToken ct = default)
     {
-        var domainEvents = await _domainEventHandler.FetchDomainEventsAsync(_unitOfWork.OutboxMessageRepository, eventAmount, ct);
+        var domainEvents = await _domainEventHandler.FetchDomainEventsAsync(
+            _unitOfWork.OutboxMessageRepository, 
+            eventAmount, 
+            ct);
 
-        var tasks = domainEvents
-                .Select(async (domainEvent) => await _domainEventPublisher.PublishAsync(domainEvent, ct));
+        if (domainEvents is null || !domainEvents.Any())
+        {
+            return;
+        }
+
+        var tasks = domainEvents.Select(async (domainEvent) 
+            => await _domainEventPublisher.PublishAsync(domainEvent, ct));
 
         await Task.WhenAll(tasks);
     }

@@ -1,13 +1,13 @@
 ﻿using Evento.Domain.SeedWork;
 using MediatR;
 
-namespace Evento.Application.SeedWork;
+namespace Evento.Application.DomainEvents;
 
-public class DomainEventNotification<TDomainEvent> : INotification 
+public class DomainEventNotification<TDomainEvent> : INotification
     where TDomainEvent : IDomainEvent
 {
     public TDomainEvent DomainEvent { get; }
 
-    public DomainEventNotification(TDomainEvent domainEvent) 
+    public DomainEventNotification(TDomainEvent domainEvent)
         => DomainEvent = domainEvent;
 }

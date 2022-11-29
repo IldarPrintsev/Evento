@@ -14,11 +14,8 @@ public abstract class Entity<TId>
     public IReadOnlyCollection<IDomainEvent> DomainEvents
        => _domainEvents.AsReadOnly();
 
-    protected Entity(TId id)
-    {
-        Id = id;
-        CreatedOn = DateTime.UtcNow;
-    }
+    protected Entity(TId id) 
+        => (Id, CreatedOn) = (id, DateTime.UtcNow);
 
     public override bool Equals(object? obj)
         => obj is Entity<TId> entity && Equals(entity);
@@ -38,16 +35,23 @@ public abstract class Entity<TId>
     public void ClearDomainEvents() 
         => _domainEvents.Clear();
 
-    protected static void ValidateRuleAndThrow(IBusinessRule rule)
+    protected static void EnsureRule(ISyncBusinessRule rule)
     {
-        if (rule.IsBroken())
+        bool isVerified = rule.Verify();
+        if (!isVerified)
         {
             throw new BusinessRuleValidationException(rule);
         }
     }
 
-    protected static bool ValidateRule(IBusinessRule rule)
-        => rule.IsBroken();
+    protected static async Task EnsureRuleAsync(IAsyncBusinessRule rule)
+    {
+        bool isVerified = await rule.VerifyAsync();
+        if (!isVerified)
+        {
+            throw new BusinessRuleValidationException(rule);
+        }
+    }
 
     protected void AddDomainEvent(IDomainEvent domainEvent) 
         => _domainEvents.Add(domainEvent);

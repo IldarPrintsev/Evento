@@ -1,4 +1,4 @@
-﻿using Evento.Application.SeedWork;
+﻿using Evento.Application.DomainEvents;
 using Evento.Domain.Users;
 using MediatR;
 

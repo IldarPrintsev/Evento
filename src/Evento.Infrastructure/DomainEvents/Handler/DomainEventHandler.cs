@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Evento.Domain.SeedWork;
+﻿using Evento.Domain.SeedWork;
 using Evento.Infrastructure.DomainEvents.Converter;
 using Evento.Infrastructure.Outbox;
 

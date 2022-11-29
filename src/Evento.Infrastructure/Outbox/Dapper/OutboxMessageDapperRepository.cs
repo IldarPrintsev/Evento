@@ -26,6 +26,6 @@ public class OutboxMessageDapperRepository : IOutboxMessageRepository
         await _sqlConnection.ExecuteAsync(sql, new { }, _dbTransaction, commandType: CommandType.Text);
     }
     
-    Task IOutboxMessageRepository.ProcessAsync(IEnumerable<Guid> outboxIds, CancellationToken ct) 
+    Task IOutboxMessageRepository.UpdateProcessOnAsync(IEnumerable<Guid> outboxIds, CancellationToken ct) 
         => throw new NotImplementedException();
 }
