@@ -1,4 +1,7 @@
 ﻿using Evento.Infrastructure.BackgroundJobs;
+using Evento.Infrastructure.DomainEvents.Converter;
+using Evento.Infrastructure.DomainEvents.Handler;
+using Evento.Infrastructure.DomainEvents.Processor;
 using Evento.Infrastructure.Persistence.Dapper;
 using Evento.Infrastructure.Persistence.EF;
 using Evento.Infrastructure.SharedKernel;
@@ -19,7 +22,8 @@ public static class InfrastructureConfiguration
         this IServiceCollection services,
         IConfiguration configuration,
         string sqlConnectionString,
-        SqlORM sqlORM) where TDomainEventPublisher : class, IDomainEventPublisher
+        SqlORM sqlORM) 
+        where TDomainEventPublisher : class, IDomainEventPublisher
     {
         switch (sqlORM)
         {
@@ -34,6 +38,9 @@ public static class InfrastructureConfiguration
         }
 
         services.AddScoped<IDomainEventPublisher, TDomainEventPublisher>();
+        services.AddScoped<IDomainEventConverter, DomainEventJsonConverter>();
+        services.AddScoped<IDomainEventHandler, DomainEventHandler>();
+        services.AddScoped<IDomainEventProcessor, DomainEventProcessor>();
 
         services.AddQuartzJobs();
 
