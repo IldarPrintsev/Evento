@@ -2,18 +2,18 @@
 
 namespace Evento.Domain.Parties;
 
-public sealed class Party 
+public sealed class Party
     : Entity<PartyId>, IAggregateRoot
 {
-    public string Title { get; }
-    public string Description { get; }
-    public PartyTime PartyTime { get; }
-    public PartyLocation Location { get; }
+    public string Title { get; private set; }
+    public PartyTime PartyTime { get; private set; }
+    public PartyLocation Location { get; private set; }
+    public string? Description { get; private set; }
 
     private Party(string title,
-                  string description,
                   PartyTime partyTime,
-                  PartyLocation location) 
+                  PartyLocation location,
+                  string? description)
         : base(new PartyId(Guid.NewGuid()))
     {
         Title = title;
@@ -23,15 +23,22 @@ public sealed class Party
     }
 
     public static Party Create(string title,
-                               string description,
                                PartyTime partyTime,
-                               PartyLocation location)
-    {
-        var party = new Party(title,
-                              description,
-                              partyTime,
-                              location);
+                               PartyLocation location,
+                               string? description = null) 
+        => new(title,
+               partyTime,
+               location,
+               description);
 
-        return party;
+    public void Update(string title,
+                       PartyTime partyTime,
+                       PartyLocation location,
+                       string? description = null)
+    {
+        Title = title;
+        Description = description;
+        PartyTime = partyTime;
+        Location = location;
     }
 }

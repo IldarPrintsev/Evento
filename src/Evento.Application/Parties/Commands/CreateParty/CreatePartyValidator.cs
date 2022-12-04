@@ -8,7 +8,6 @@ public sealed class CreatePartyValidator
     public CreatePartyValidator()
     {
         RuleFor(x => x.Title).NotEmpty();
-        RuleFor(x => x.Description).NotEmpty();
         RuleFor(x => x.Longitude).NotEmpty();
         RuleFor(x => x.Latitude).NotEmpty();
         RuleFor(x => x.StartedOn).NotEmpty();

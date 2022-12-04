@@ -2,5 +2,5 @@
 
 public interface IAsyncBusinessRule : IBusinessRule
 {
-    Task<bool> VerifyAsync();
+    Task<bool> VerifyAsync(CancellationToken ct = default);
 }

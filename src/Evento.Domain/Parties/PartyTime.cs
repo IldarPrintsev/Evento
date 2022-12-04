@@ -1,4 +1,5 @@
-﻿using Evento.Domain.SeedWork;
+﻿using Evento.Domain.Parties.Rules;
+using Evento.Domain.SeedWork;
 
 namespace Evento.Domain.Parties;
 
@@ -10,6 +11,10 @@ public sealed class PartyTime : ValueObject
     private PartyTime(DateTimeOffset startedOn, DateTimeOffset finishedOn) 
         => (StartedOn, FinishedOn) = (startedOn, finishedOn);
 
-    public static PartyTime Create(DateTimeOffset startedOn, DateTimeOffset finishedOn) 
-        => new(startedOn, finishedOn);
+    public static PartyTime Create(DateTimeOffset startedOn, DateTimeOffset finishedOn)
+    {
+        EnsureRule(new PartyTimeRule(startedOn, finishedOn));
+
+        return new(startedOn, finishedOn);
+    }
 }

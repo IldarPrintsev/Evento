@@ -1,8 +1,13 @@
 ﻿using Evento.Domain.SeedWork;
+using Evento.Domain.SharedKernel;
 
 namespace Evento.Domain.Users;
 
-public class UserCreated : IDomainEvent
+public sealed class UserCreated : IDomainEvent
 {
-    public DateTime OccurredOn => DateTime.UtcNow;
+    public DateTimeOffset OccurredOn => SystemClock.Now;
+    public UserEmail UserEmail { get; }
+
+    public UserCreated(UserEmail userEmail) 
+        => UserEmail = userEmail;
 }

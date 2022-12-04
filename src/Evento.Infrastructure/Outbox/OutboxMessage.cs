@@ -4,16 +4,16 @@ public class OutboxMessage
 {
     public Guid Id { get; set; }
 
-    public string Type { get; set; }
+    public string Type { get; set; } = default!;
 
-    public string Data { get; set; }
+    public string Data { get; set; } = default!;
 
-    public DateTime OccurredOn { get; set; }
+    public DateTimeOffset OccurredOn { get; set; }
 
-    public DateTime? ProcessedOn { get; set; }
+    public DateTimeOffset? ProcessedOn { get; set; }
 
     public OutboxMessage(
-        DateTime occurredOn,
+        DateTimeOffset occurredOn,
         string type,
         string data)
     {

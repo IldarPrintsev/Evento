@@ -1,4 +1,6 @@
-﻿namespace Evento.Domain.SeedWork;
+﻿using Evento.Domain.SharedKernel;
+
+namespace Evento.Domain.SeedWork;
 
 public abstract class Entity<TId>
     : DomainObject, IEntity, IEquatable<Entity<TId>> 
@@ -6,10 +8,10 @@ public abstract class Entity<TId>
 {
     private readonly List<IDomainEvent> _domainEvents = new();
 
-    public TId Id { get; protected set; }
-    public DateTime CreatedOn { get; protected set; }
+    public TId Id { get; }
+    public DateTimeOffset CreatedOn { get; } = SystemClock.Now;
     public string? CreatedBy { get; protected set; }
-    public DateTime? LastModifiedOn { get; protected set; }
+    public DateTimeOffset? LastModifiedOn { get; protected set; }
     public string? LastModifiedBy { get; protected set; }
     public IReadOnlyCollection<IDomainEvent> DomainEvents
        => _domainEvents.AsReadOnly();

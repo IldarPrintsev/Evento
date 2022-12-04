@@ -11,9 +11,9 @@ public abstract class DomainObject
         }
     }
 
-    protected static async Task EnsureRuleAsync(IAsyncBusinessRule rule)
+    protected static async Task EnsureRuleAsync(IAsyncBusinessRule rule, CancellationToken ct = default)
     {
-        bool isVerified = await rule.VerifyAsync();
+        bool isVerified = await rule.VerifyAsync(ct);
         if (!isVerified)
         {
             throw new BusinessRuleValidationException(rule);

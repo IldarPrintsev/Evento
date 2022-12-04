@@ -2,16 +2,15 @@
 using MediatR;
 
 namespace Evento.Api.SeedWork;
-public abstract record BaseHttpRequest<TMediatorRequest> : IRegister
-    where TMediatorRequest : IBaseRequest
+
+public abstract record BaseHttpRequest<TMediatorRequest> 
+    : IRegister where TMediatorRequest : IBaseRequest
 {
     public TMediatorRequest ToCommand() 
         => this.Adapt<TMediatorRequest>();
 
-    public void Register(TypeAdapterConfig config)
-    {
-        AddCustomMappings();
-    }
+    public void Register(TypeAdapterConfig config) 
+        => AddCustomMappings();
 
     protected virtual void AddCustomMappings() { }
 
