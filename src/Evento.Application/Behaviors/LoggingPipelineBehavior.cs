@@ -14,10 +14,9 @@ public sealed class LoggingPipelineBehavior<TRequest, TResponse>
     public LoggingPipelineBehavior(ILogger<LoggingPipelineBehavior<TRequest, TResponse>> logger)
         => _logger = logger;
 
-    public async Task<TResponse> Handle(
-        TRequest request,
-        RequestHandlerDelegate<TResponse> next,
-        CancellationToken ct)
+    public async Task<TResponse> Handle(TRequest request,
+                                        RequestHandlerDelegate<TResponse> next,
+                                        CancellationToken ct)
     {
         TResponse response;
         string requestName = typeof(TRequest).Name;

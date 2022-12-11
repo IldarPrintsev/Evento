@@ -42,7 +42,7 @@ public static class InfrastructureConfiguration
         services.AddScoped<IDomainEventHandler, DomainEventHandler>();
         services.AddScoped<IDomainEventProcessor, DomainEventProcessor>();
 
-        services.AddQuartzJobs();
+        //services.AddQuartzJobs();
 
         return services;
     }

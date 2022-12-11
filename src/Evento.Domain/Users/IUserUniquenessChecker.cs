@@ -4,5 +4,5 @@ namespace SampleProject.Domain.Customers;
 
 public interface IUserUniquenessChecker
 {
-    Task<bool> VerifyAsync(UserEmail userEmail);
+    Task<bool> VerifyAsync(UserEmail userEmail, CancellationToken ct = default);
 }

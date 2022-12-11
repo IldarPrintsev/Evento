@@ -8,7 +8,7 @@ public sealed class UserEmail : ValueObject
     public string Value { get; }
 
     private UserEmail(string value)
-        => Value = value;
+        => Value = value.ToLower();
 
     public static UserEmail Create(string email)
     {

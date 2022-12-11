@@ -14,6 +14,6 @@ public class UserUniquenessAsyncRule : IAsyncBusinessRule
     public string Message
         => $"Email {_userEmail} is already in use.";
 
-    public Task<bool> VerifyAsync()
-        => _checker.VerifyAsync(_userEmail);
+    public async Task<bool> VerifyAsync(CancellationToken ct = default)
+        => await _checker.VerifyAsync(_userEmail, ct);
 }

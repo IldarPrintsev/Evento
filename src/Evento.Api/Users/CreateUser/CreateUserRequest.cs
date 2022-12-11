@@ -6,9 +6,9 @@ namespace Evento.Api.Users.CreateUser;
 public sealed record CreateUserRequest
         : BaseHttpRequest<CreateUserCommand>
 {
-    public string Username { get; init; } = default!;
+    public string Email { get; init; } = default!;
 
     protected override void AddCustomMappings() 
         => SetCustomMappings<CreateUserRequest>()
-            .Map(dest => dest.Username, src => src.Username);
+            .Map(dest => dest.Email, src => src.Email);
 }
